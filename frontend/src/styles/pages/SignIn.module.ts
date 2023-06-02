@@ -15,11 +15,12 @@ export const SignContainer = styled.div`
     max-width: 350px;
     margin-right: 30px;
     form {
-      margin-top: 100px;
+      margin-top: 50px;
       h1 {
         font-size: 32px;
         margin-bottom: 32px;
         color: #737380;
+        text-align: center;
       }
     }
   }
