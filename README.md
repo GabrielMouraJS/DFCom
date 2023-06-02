@@ -61,7 +61,7 @@ Sinta-se à vontade para abrir issues ou enviar pull requests com suas sugestõe
 Se você tiver alguma dúvida, entre em contato com os desenvolvedores por e-mail: gabrielmourajs@gmail.com
 
 ## 🎯 Próximos passos
-À medida que o projeto MindMinder evolui, planejamos implementar os seguintes recursos e melhorias:
+À medida que o projeto evolui, planejamos implementar os seguintes recursos e melhorias:
 
 1. **Containerizaçao com Docker e Docker-Compose**
 
