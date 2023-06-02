@@ -1,6 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { CreateUserUseCase } from 'src/application/modules/users/use-cases/create-user';
 import { hashPassword } from 'src/helpers/Hash';
+import { JwtGuard } from '../auth/guards/jwt-auth.guard';
+import { User } from 'src/application/modules/users/entities/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -19,5 +28,13 @@ export class UsersController {
     return {
       user,
     };
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('me')
+  async me(@Request() req) {
+    const user = req.user as User;
+
+    return { user };
   }
 }

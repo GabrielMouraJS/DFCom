@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { DeleteRefreshTokenUseCase } from 'src/application/modules/tokens/use-cases/delete-refresh-token';
 import { FindRefreshTokenUseCase } from 'src/application/modules/tokens/use-cases/find-refresh-token';
 import { GetUserByEmailUseCase } from 'src/application/modules/users/use-cases/get-user-by-email';
 import { GetUserByIdUseCase } from 'src/application/modules/users/use-cases/get-user-by-id';
@@ -13,6 +14,7 @@ export class AuthService {
     private getUserByEmailUseCase: GetUserByEmailUseCase,
     private getUserByIdUseCase: GetUserByIdUseCase,
     private findRefreshTokenUseCase: FindRefreshTokenUseCase,
+    private deleteRefreshTokenUseCase: DeleteRefreshTokenUseCase,
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -29,19 +31,15 @@ export class AuthService {
   public async login(user: any) {
     const payload = {
       email: user.email,
-      sub: {
-        name: user.email,
-      },
     };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
 
-  public async refreshToken(token: string, userId: string) {
+  public async refreshToken(token: string) {
     const refreshToken = await this.findRefreshTokenUseCase.execute({
       id: token,
-      userId,
     });
 
     if (!refreshToken) {
@@ -58,13 +56,13 @@ export class AuthService {
 
     const payload = {
       email: user.email,
-      sub: {
-        name: user.email,
-      },
     };
+
+    // await this.deleteRefreshTokenUseCase.execute({ id: refreshToken.id });
 
     return {
       access_token: this.jwtService.sign(payload),
+      user,
     };
   }
 }

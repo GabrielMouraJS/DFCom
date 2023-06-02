@@ -8,14 +8,10 @@ import { PrismaTokenMapper } from '../../mappers/prisma-token-mapper';
 @Injectable()
 export class PrismaTokensRepository implements TokensRepository {
   constructor(private prismaService: PrismaService) {}
-  async findRefreshToken(id: string, userId: string): Promise<Token | null> {
+  async findRefreshToken(id: string): Promise<Token | null> {
     const raw = await this.prismaService.refreshToken.findFirst({
       where: {
         id: id,
-        userId: userId,
-      },
-      orderBy: {
-        id: 'desc',
       },
     });
 
@@ -30,5 +26,12 @@ export class PrismaTokensRepository implements TokensRepository {
     });
 
     return refreshToken.id;
+  }
+  async deleteRefreshToken(id: string): Promise<void> {
+    await this.prismaService.refreshToken.delete({
+      where: {
+        id: id,
+      },
+    });
   }
 }

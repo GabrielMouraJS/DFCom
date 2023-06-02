@@ -19,7 +19,7 @@ export class AuthController {
   ) {}
 
   @UseGuards(LocalAuthGuard)
-  @Post()
+  @Post('login')
   async login(@Request() req, @Response() res) {
     const tokens = await this.authService.login(req.user);
 
@@ -27,29 +27,31 @@ export class AuthController {
       userId: req.user.id,
     });
 
-    res.header('Authorization', tokens.access_token);
-    res.header('Refresh-Token', refreshToken);
-    return res.send();
+    return res.status(201).json({
+      user: req.user,
+      authorization: tokens.access_token,
+      refreshToken: refreshToken,
+    });
   }
 
   @Post('refresh-token')
   async refreshToken(@Request() req, @Response() res) {
-    const { refreshToken, userId } = req.body;
-    if (!refreshToken || !userId) {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
       return res.status(400).send();
     }
-    const { access_token } = await this.authService.refreshToken(
+    const { access_token, user } = await this.authService.refreshToken(
       refreshToken,
-      userId,
     );
 
     const newRefreshToken = await this.generateRefreshTokenUseCase.execute({
-      userId,
+      userId: user.id,
     });
 
-    res.header('Authorization', access_token);
-    res.header('Refresh-Token', newRefreshToken);
-
-    return res.send();
+    return res.status(200).json({
+      authorization: access_token,
+      refreshToken: newRefreshToken,
+      user,
+    });
   }
 }

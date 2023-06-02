@@ -43,7 +43,4 @@ export class PrismaUsersRepository implements UsersRepository {
     });
     return PrismaUserMapper.toDomain(newUser) as User;
   }
-  save(user: User): Promise<User> {
-    throw new Error('Method not implemented.');
-  }
 }

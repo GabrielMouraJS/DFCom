@@ -11,7 +11,7 @@ import { TokensModule } from 'src/application/modules/tokens/tokens.module';
     JwtModule.register({
       secret: `${process.env.JWT_SECRET}`,
       signOptions: {
-        expiresIn: '60s',
+        expiresIn: '180s',
       },
     }),
     UsersModule,

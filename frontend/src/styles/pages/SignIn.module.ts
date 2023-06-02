@@ -13,7 +13,7 @@ export const SignContainer = styled.div`
   section.form {
     width: 100%;
     max-width: 350px;
-    margin-right: 30px;
+
     form {
       margin-top: 50px;
       h1 {
@@ -39,5 +39,14 @@ export const SignContainer = styled.div`
     &:hover {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 1182px) {
+    justify-content: center;
+  }
+`
+export const AnimationContainer = styled.div`
+  @media (max-width: 1182px) {
+    display: none;
   }
 `

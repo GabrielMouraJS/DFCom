@@ -117,4 +117,22 @@ button {
 .relative {
   position: relative;
 }
+.backLink {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: var(--color-primary);
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .backLink {
+    margin-right: 8px;
+  }
+
+  .backLink {
+    opacity: 0.8;
+  }
 `
