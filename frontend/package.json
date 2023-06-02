@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "13.4.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.44.3",
+    "react-lottie": "^1.2.3",
+    "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^1.2.0",
+    "@types/node": "20.2.5",
+    "@types/styled-components": "^5.1.26",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.4",
+    "typescript": "5.1.3"
+  }
+}
